@@ -90,7 +90,7 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 
 | 属性 | 类型 | 默认值 | 描述 |
 |:-----|:-----|:-----|:-----|
-|ajax|JSON对象|{}|jQuery的ajax的配置(settings),支持jQuery.ajax所有的配置选项.注意:不用设置请求data和success函数.ajax的settings,请参照jQuery官方说明|
+|ajax|`JSON Object`|{}|jQuery的ajax的配置(settings),支持jQuery.ajax所有的配置选项.注意:不用设置请求data和success函数.ajax的settings,请参照jQuery官方说明|
 |size|正整数|15|用于指定`P.Slice`(页片)显示多少条记录.换言之,指定每页显示多少条记录|
 |currentPage|正整数|1|用于指定当前页的`P.Index`(分页索引),例如:把currentPage设置为N,那么就显示第N页|
 |dataListBox|jQuery对象|$("#dataListBox")|用于装载`P.Slice`的盒子|
