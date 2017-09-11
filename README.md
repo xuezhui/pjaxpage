@@ -60,7 +60,7 @@ $.pjaxPage({
 ```
 
 ## 4. Example
-https://github.com/xixifeng/pjaxpage/example/  
+[http://xixifeng.com.oschina.io/pjaxpage/example/](http://xixifeng.com.oschina.io/pjaxpage/example/) 
 
 
 
