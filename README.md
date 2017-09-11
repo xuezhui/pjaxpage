@@ -22,40 +22,40 @@ Here is the minimal HTML code to get tabs working:
 ### 3. JS Setup
 ```javascript
 $.pjaxPage({
+
+	// ajax 配置
+	ajax : {
+		url : "https://your data interface",
+		dataType : "jsonp", // json or jsonp type
+	},
 	
-			// ajax 配置
-			ajax : {
-				url : "https://your data interface",
-				dataType : "jsonp", // json or jsonp type
-			},
+	// 拼接分页数据,并返回
+	createDataHtml : function(data) {
+		var content = data.pageData.content;
+		var total = content.length;
+		if (total == 0)
+			return "无数据";
+
+		var dataHtml = '';
+		for (var i = 0; i < total; i++) {
 			
-			// 拼接分页数据,并返回
-			createDataHtml : function(data) {
-				var content = data.pageData.content;
-				var total = content.length;
-				if (total == 0)
-					return "无数据";
+			var cizu = content[i].cizu.replace(/"/g,"");
+			var pinyin = content[i].pinyin;
+			var options = content[i].options;
+			var ok = content[i].ok.replace(/"/g,"");
+			var info = content[i].info.replace(/"/g,"");
+			
+			dataHtml += '<tr>';
+			dataHtml += '	<td>' + cizu + '</td>';
+			dataHtml += '	<td>' + pinyin + '</td>';
+			dataHtml += '	<td>' + options + '</td>';
+			dataHtml += '	<td>' + ok + '</td>';
+			dataHtml += '	<td>' + info + '</td>';
+			dataHtml += '</tr>';
+		}
 
-				var dataHtml = '';
-				for (var i = 0; i < total; i++) {
-					
-					var cizu = content[i].cizu.replace(/"/g,"");
-					var pinyin = content[i].pinyin;
-					var options = content[i].options;
-					var ok = content[i].ok.replace(/"/g,"");
-					var info = content[i].info.replace(/"/g,"");
-					
-					dataHtml += '<tr>';
-					dataHtml += '	<td>' + cizu + '</td>';
-					dataHtml += '	<td>' + pinyin + '</td>';
-					dataHtml += '	<td>' + options + '</td>';
-					dataHtml += '	<td>' + ok + '</td>';
-					dataHtml += '	<td>' + info + '</td>';
-					dataHtml += '</tr>';
-				}
-
-				return dataHtml;
-			}
+		return dataHtml;
+	}
 });
 ```
 
