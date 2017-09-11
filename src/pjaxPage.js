@@ -29,7 +29,7 @@
                      pageCodeItem : "a[tabindex]",           // 页码项元素, 默认值是 "a[tabindex]"
                      eventName: "click",                     // 页码触发事件,默认是"click",可选值,所有事件中任意一个名称即可. mouseover,dblclick 当然,你也可以基于jQuery定义一个事件
                      dataCache : true,                       // 是否用jQuery的data缓存数据, 默认允许
-                     clear : function(){                     // 清楚缓存
+                     clear : function(){                     // 清除缓存
                     	this.dataListBox.removeData();
                      },
                      writeListBefore: function(){            // 数据列表写入倒dom之前,该方法的上下文对象为opts

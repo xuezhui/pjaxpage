@@ -11,21 +11,45 @@
  */
 var pjaxPage = $.pjaxPage({
 	
-			// ajax 配置
 			ajax : {
 				url : "http://xixifeng.com/pjaxpage-data.php",
 				dataType : "jsonp",
+				async : false,
+				cache : false,
+				error : function() {
+				}
 			},
-			
-			// 拼接分页数据,并返回
-			createDataHtml : function(data) {
+			pageModel: {
+				name : "numberModel",
+				opts : {}
+			},
+			enabledPjax : true,
+			dataCache : true,
+			writeListBefore : function() {
+
+			},
+			writeListAfter : function() {
+
+			},
+			notFoundTip : "<tr><td colspan=\"13\">暂无相关信息</td></tr>",
+			getRequestData : function(currentPage) {
+				var params = {
+					page : currentPage,
+					size : this.size
+				};
+
+				return $.param(params); // 分页查询参数
+			},
+
+			createDataHtml : function(data) { // 在此仅需拼接分页数据 然后return 即可
 				var content = data.pageData.content;
 				var total = content.length;
 				if (total == 0)
-					return "无数据";
+					return "";
 
 				var dataHtml = '';
-				for (var i = 0; i < total; i++) {
+				var sNo = (this.currentPage - 1) * this.size + 1; // 遍历开始序号
+				for (var i = 0; i < total; i++, sNo++) {
 					
 					var cizu = content[i].cizu.replace(/"/g,"");
 					var pinyin = content[i].pinyin;
@@ -45,4 +69,7 @@ var pjaxPage = $.pjaxPage({
 				return dataHtml;
 			}
 });
+
+pjaxPage.clearPageCache();
+
 
