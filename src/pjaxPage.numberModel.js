@@ -17,7 +17,6 @@
         	// 分页模型的可选配置选项的默认值
             var defaults = {
                 activeName: "active",             // (默认:active) 触发后的页码样式
-                pageCodeBox: $("#pageCodeBox"), // (可选项) 用于存放页码的容器
                 indexNum:5                        // (可选项) 指定在分页控制区中显示分页索引的个数(不包含"..."或"箭头")
             };
             
@@ -47,7 +46,7 @@
             var pageHrefPre = "";
             
             if(pjaxPageObj != null) {
-                  pageHrefPre = pjaxPageObj.getReqParam(pjaxPageObj.currentPage);   // 当前请求参数    
+                  pageHrefPre = pjaxPageObj.getReqParam();   // 当前请求参数    
                   pageHrefPre = pjaxPageObj.pageHrefPre + "?" + pageHrefPre;
                   // 页就是当前页不用传递.
                   // 过滤 page 参数(即过滤page=xx)
@@ -120,7 +119,7 @@
           }
         
          // 写入到dom
-         opts.pageCodeBox.html(pageMenu);
+         pjaxPageObj.pageCodeBox.html(pageMenu);
 
          return opts;
                 

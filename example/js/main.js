@@ -21,10 +21,12 @@ var pjaxPage = $.pjaxPage({
 			},
 			pageModel: {
 				name : "numberModel",
-				opts : {}
+				opts : {
+					indexNum: 7
+					}
 			},
 			enabledPjax : true,
-			dataCache : true,
+			dataCache : false,
 			writeListBefore : function() {
 
 			},
@@ -32,9 +34,9 @@ var pjaxPage = $.pjaxPage({
 
 			},
 			notFoundTip : "<tr><td colspan=\"13\">暂无相关信息</td></tr>",
-			getReqParam : function(currentPage) {
+			getReqParam : function() {
 				var params = {
-					page : currentPage,
+					page : this.currentPage,
 					size : this.size
 				};
 
@@ -48,8 +50,8 @@ var pjaxPage = $.pjaxPage({
 					return "";
 
 				var dataHtml = '';
-				var sNo = (this.currentPage - 1) * this.size + 1; // 遍历开始序号
-				for (var i = 0; i < total; i++, sNo++) {
+				var orderNum = (this.currentPage - 1) * this.size + 1; // 序号
+				for (var i = 0; i < total; i++, orderNum++) {
 					
 					var cizu = content[i].cizu.replace(/"/g,"");
 					var pinyin = content[i].pinyin;
@@ -58,6 +60,7 @@ var pjaxPage = $.pjaxPage({
 					var info = content[i].info.replace(/"/g,"");
 					
 					dataHtml += '<tr>';
+					dataHtml += '	<td>' + orderNum + '</td>';
 					dataHtml += '	<td>' + cizu + '</td>';
 					dataHtml += '	<td>' + pinyin + '</td>';
 					dataHtml += '	<td>' + options + '</td>';
