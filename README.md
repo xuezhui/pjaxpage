@@ -93,7 +93,7 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |ajax|`JSON Object`|{}|jQuery的ajax的配置(settings),支持jQuery.ajax所有的配置选项.注意:不用设置请求data和success函数.ajax的settings,请参照jQuery官方说明|
 |size|正整数|15|用于指定`P.Slice`(页片)显示多少条记录.换言之,指定每页显示多少条记录|
 |currentPage|正整数|1|用于指定当前页的`P.Index`(分页索引),例如:把currentPage设置为N,那么就显示第N页|
-|dataListBox|jQuery对象|$("#dataListBox")|用于装载`P.Slice`的盒子|
+|dataListBox|<nobr>jQuery对象</nobr>|$("#dataListBox")|用于装载`P.Slice`的盒子|
 |pageCodeBox|jQuery对象|$("#pageCodeBox")|用于装载`P.Ctrl`的盒子|
 |pageModel|JSON对象| {name:"numberModel"}|用于配置分页模型,开发者扩展扩展自己的分页模型.`numberModel`的可选参数,请参阅分页模型章节|
 |createDataHtml(data)|回调函数|返回""|共:1个参数. 第1个参数是ajax成功请求所响应的数据.该函数的作用:创建当前`P.Slice`的HTML代码,并返回|
@@ -104,16 +104,16 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |clear()|回调函数|清除所有页片缓存|清除所有页片缓存|
 |writeListBefore()|回调函数|不做什么|数据列表写入倒dom之前,该方法的上下文对象(this)对象是pjaxPage的opts|
 |writeListAfter(data)|回调函数|不做什么|数据列表写入倒dom之后,data为服务器响应的数据,该方法的上下文对象(this)为opts|
-|getRequestData(currentPage)|回调函数|默认做了什么,请看原码|获取请求参数的方式,注意:它的上下文对象为opts, currentPage表示当前页|
-|activeName|字符串|active|`P.Index`被触发后的class样式选择器|
+|<nobr>getRequestData(currentPage)</nobr>|回调函数|---|获取请求参数,注意:它的上下文对象为opts, currentPage表示当前页|
+|activeName|字符串|active|`P.Index`被触发后的class样式选择器的名称|
 |pjaxId|字符串|xixifeng_pjax|pjax ID 会显示在浏览器地址栏上|
 |enabledPjax|布尔|true|是否启用pjax功能|
-|pageHrefPre|字符串|window.location.href.replace<br />(window.location.search,"")|`P.Index`链接地址的前缀|
-|writeData(data,currentPage)|回调函数|默认做了什么,请看原码|写入数据,data为服务响应的数据,currentPate当前页,注意,此方法的上下文对象为opts|
-|initPage(currentPage)|回调函数|默认做了什么,请看原码|从服务器获得数据的方式,然后执行写入数据,上下文对象为opts|
-|triggerEvent(ts,evt)|回调函数|默认做了什么,请看原码|触发`P.Index`的事件要做的事情. 注意:该方法的上下文对象是opts,ts:表示事件触发源的对象;evt:表示事件对象|
-|pageIndex(indexNum,<br />currentPage,totalpage)|回调函数|默认做了什么,请看原码|计算开始页和结束页.参数说明:indexNum:(必选项)指定在分页控制区中显示分页索引的个数(不包含"N...","...N"或"箭头");currentPage:(必选项)当前页;totalpage:(必选项)总页面数 返回格式: {"startpage" : startpage,"endpage":endpage}|
-|queryParam(href,name)|回调函数|默认做了什么,请看原码|从一个参数地址中查询出一个参数的值.举例: 从a=1&b=2&c=3查出c的值. 写法:queryParam("a=1&b=2&c=3","c") 得出3.参数说明:href:(必选项)url地址;name:(必选项)参数的名称.返回: 参数值,如果没有找到返回""|
+|pageHrefPre|字符串|---|`P.Index`链接地址的前缀|
+|writeData(data,currentPage)|回调函数|---|写入数据,data为服务响应的数据,currentPate当前页,注意,此方法的上下文对象为opts|
+|initPage(currentPage)|回调函数|---|从服务器获得数据的方式,然后执行写入数据,上下文对象为opts|
+|triggerEvent(ts,evt)|回调函数|---|触发`P.Index`的事件要做的事情. 注意:该方法的上下文对象是opts,ts:表示事件触发源的对象;evt:表示事件对象|
+|pageIndex(indexNum,<br />currentPage,totalpage)|回调函数|---|计算开始页和结束页.参数说明:indexNum:(必选项)指定在分页控制区中显示分页索引的个数(不包含"N+...","...N+"或"箭头");currentPage:(必选项)当前页;totalpage:(必选项)总页面数 返回格式: {"startpage" : startpage,"endpage":endpage}|
+|queryParam(href,name)|回调函数|---|从一个参数地址中查询出一个参数的值.举例: 从a=1&b=2&c=3查出c的值. 写法:queryParam("a=1&b=2&c=3","c") 得出3.参数说明:href:(必选项)url地址;name:(必选项)参数的名称.返回: 参数值,如果没有找到返回""|
 
 
 
