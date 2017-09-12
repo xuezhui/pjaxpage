@@ -112,7 +112,7 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |`writeData(data,currentPage)`|回调函数|---|写入数据,data为服务响应的数据,currentPate当前页,注意,此方法的上下文对象为opts|
 |`initPage(currentPage)`|回调函数|---|从服务器获得数据的方式,然后执行写入数据,上下文对象为opts|
 |`triggerEvent(ts,evt)`|回调函数|---|触发`P.Index`的事件要做的事情. 注意:该方法的上下文对象是opts,ts:表示事件触发源的对象;evt:表示事件对象|
-|`pageIndex(indexNum,currentPage,totalpage)`|回调函数|---|计算开始页和结束页.参数说明:indexNum:(必选项)指定在分页控制区中显示分页索引的个数(不包含"N+...","...N+"或"箭头");currentPage:(必选项)当前页;totalpage:(必选项)总页面数 返回格式: {"startpage" : startpage,"endpage":endpage}|
+|pageIndex(indexNum,<br>currentPage,totalpage)|回调函数|---|计算开始页和结束页.参数说明:indexNum:(必选项)指定在分页控制区中显示分页索引的个数(不包含"N+...","...N+"或"箭头");currentPage:(必选项)当前页;totalpage:(必选项)总页面数 返回格式: {"startpage" : startpage,"endpage":endpage}|
 |`queryParam(href,name)`|回调函数|---|从一个参数地址中查询出一个参数的值.举例: 从a=1&b=2&c=3查出c的值. 写法:queryParam("a=1&b=2&c=3","c") 得出3.参数说明:href:(必选项)url地址;name:(必选项)参数的名称.返回: 参数值,如果没有找到返回""|
 
 
