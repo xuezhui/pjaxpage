@@ -47,7 +47,7 @@
             var pageHrefPre = "";
             
             if(pjaxPageObj != null) {
-                  pageHrefPre = pjaxPageObj.getRequestData(pjaxPageObj.currentPage);   // 当前请求参数    
+                  pageHrefPre = pjaxPageObj.getReqParam(pjaxPageObj.currentPage);   // 当前请求参数    
                   pageHrefPre = pjaxPageObj.pageHrefPre + "?" + pageHrefPre;
                   // 页就是当前页不用传递.
                   // 过滤 page 参数(即过滤page=xx)

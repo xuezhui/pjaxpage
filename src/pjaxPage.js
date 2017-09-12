@@ -36,7 +36,7 @@
                      },          
                      writeListAfter: function(data){         // 数据列表写入倒dom之后,data为服务器响应的数据,该方法的上下文对象为opts
                      },       
-                     getRequestData: function(currentPage){  // 获取请求参数的方式,注意:它的上下文对象为opts, currentPage表示当前页
+                     getReqParam: function(currentPage){  // 获取请求参数的方式,注意:它的上下文对象为opts, currentPage表示当前页
                     	 var params = {
              					page : currentPage,
              					size : this.size
@@ -98,7 +98,7 @@
                             this.writeListBefore.call(this);     // 在正式发送请求之前
                             
                             // 将 data转换"&foo=bar1&foo=bar2"格式
-                            var dt  = contextObj.getRequestData.call(contextObj,currentPage);
+                            var dt  = contextObj.getReqParam.call(contextObj,currentPage);
                              
                             var ajaxSettings = this.ajax;
                             ajaxSettings.data = $.type(dt)==="string"?dt:$.param(dt);
@@ -112,7 +112,7 @@
                      triggerEvent:function(ts,evt){ // 触发事件要做的事情. 注意:该方法的上下文对象是opts,ts:表示事件触发源的对象
                          
                             if(startReqData != undefined) {
-                                 opts.getRequestData =  startReqData; // 重要.............................................................................................................................   
+                                 opts.getReqParam =  startReqData; // 重要.............................................................................................................................   
                             }
                             
                             var currentPage = ts.attr("tabindex");
@@ -136,7 +136,7 @@
                                  // 改变当前地址栏(当前触发的页码的链接地址)
                                  //地址栏 需要 pjaxId 待续...................
                                  var reqd = ts.attr("href");
-                                 history.pushState({"num": this.getRequestData(this.currentPage),"currentPage":this.currentPage}, document.title, reqd); 
+                                 history.pushState({"num": this.getReqParam(this.currentPage),"currentPage":this.currentPage}, document.title, reqd); 
                                  // 设置标题 以后有时间再扩展
                                  // document.title +=  "---" + this.currentPage;
                             }            
@@ -214,7 +214,7 @@
             if(opts.enabledPjax && supportPushState) {
                 
                  // pjax 开始时的请求方法
-                 var startReqData = opts.getRequestData; 
+                 var startReqData = opts.getReqParam; 
                  // pjax 开始时的页码
                  var home = opts.currentPage;
                  var countInitPage = 0; // 统计 initPage 方法被执行的次数
@@ -228,14 +228,14 @@
                             //alert("正在后退/前进");
                             num = history.state.num;
                             cn = history.state.currentPage;
-                            // 获取历史的请求参数,在此重写getRequestData方法即可
-                            opts.getRequestData =  function(currentPage){ 
+                            // 获取历史的请求参数,在此重写getReqParam方法即可
+                            opts.getReqParam =  function(currentPage){ 
                                 return num; // 把历史存下来的参数返回出去
                             };
                         } else {
                             //alert("pjax 结束啦!");
                             opts.currentPage = home;
-                            opts.getRequestData =  startReqData;
+                            opts.getReqParam =  startReqData;
                         }
                        
                             var cacheData = opts.dataListBox.data("pageCode"+opts.currentPage);

@@ -32,7 +32,7 @@ var pjaxPage = $.pjaxPage({
 
 			},
 			notFoundTip : "<tr><td colspan=\"13\">暂无相关信息</td></tr>",
-			getRequestData : function(currentPage) {
+			getReqParam : function(currentPage) {
 				var params = {
 					page : currentPage,
 					size : this.size
