@@ -18,7 +18,7 @@
             var defaults = {
                 activeName: "active",             // (默认:active) 触发后的页码样式
                 pageContainer: $("#pageCodeBox"), // (可选项) 用于存放页码的容器
-                numberShowCount:5                 // (可选项) 页面中要显示的页面个数
+                indexNum:5                        // (可选项) 指定在分页控制区中显示分页索引的个数(不包含"..."或"箭头")
             };
             
             // 这个函数的this对象就是pjaxPage对象, 通过它可以获得分页data和pjaxPage的配置参数(options)
@@ -39,7 +39,7 @@
             
             var activeName = opts.activeName;
                            
-            var  pageIndexObj = pjaxPageObj.pageIndex(opts.numberShowCount,number, totalPage);
+            var  pageIndexObj = pjaxPageObj.pageIndex(opts.indexNum,number, totalPage);
                 
             var startpage = pageIndexObj.startpage;
             var endpage = pageIndexObj.endpage;

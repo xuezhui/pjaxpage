@@ -147,19 +147,19 @@
                      /**
              		 * 计算开始页和结束页
              		 * 参数:
-             		 * numberShowCount (必选项) 页面中要显示的页面个数
+             		 * indexNum (必选项) 页面中要显示的页面个数
              		 * currentPage     (必选项) 当前页
              		 * totalpage       (必选项) 总页面数
              		 * 返回: {"startpage" : startpage,"endpage":endpage}
              		 */
-             		pageIndex: function(numberShowCount,currentPage,totalpage){
-             		var startpage = currentPage - ( (numberShowCount % 2 == 0) ? ( parseInt(numberShowCount / 2) - 1) : parseInt(numberShowCount / 2) );
-             		var endpage = currentPage + parseInt(numberShowCount / 2);
+             		pageIndex: function(indexNum,currentPage,totalpage){
+             		var startpage = currentPage - ( (indexNum % 2 == 0) ? ( parseInt(indexNum / 2) - 1) : parseInt(indexNum / 2) );
+             		var endpage = currentPage + parseInt(indexNum / 2);
 
              		if (startpage < 1) {
              		    startpage = 1;
-             		    if (totalpage >= numberShowCount) {
-             		         endpage = numberShowCount;
+             		    if (totalpage >= indexNum) {
+             		         endpage = indexNum;
              		    }
              		    else {
              		         endpage = totalpage;
@@ -168,8 +168,8 @@
              		}
              		if (endpage > totalpage) {
              		    endpage = totalpage;
-             		    if ((endpage - numberShowCount) > 0)
-             		        startpage = endpage - numberShowCount + 1;
+             		    if ((endpage - indexNum) > 0)
+             		        startpage = endpage - indexNum + 1;
              		    else
              		        startpage = 1;
              		} 

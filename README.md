@@ -83,7 +83,7 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |索引触发状态|`P.Active`|用于明显标记被触发的分页索引的状态,称之为**索引触发状态**|
 
 定义名,如下图所示:  
-![定义名](http://xixifeng.com.oschina.io/pjaxpage/example/img/names.png "定义名")  
+![定义名](https://xixifeng.github.io/pjaxpage/example/img/names.png "定义名")  
 
 
 ## 5. pjaxPage配置选项(opts)
@@ -108,15 +108,12 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |activeName|字符串|active|`P.Index`被触发后的class样式选择器|
 |pjaxId|字符串|xixifeng_pjax|pjax ID 会显示在浏览器地址栏上|
 |enabledPjax|布尔|true|是否启用pjax功能|
-|pageHrefPre|字符串|window.location.href.replace(window.location.search,"")|`P.Index`链接地址的前缀|
+|pageHrefPre|字符串|window.location.href.replace<br />(window.location.search,"")|`P.Index`链接地址的前缀|
 |writeData(data,currentPage)|回调函数|默认做了什么,请看原码|写入数据,data为服务响应的数据,currentPate当前页,注意,此方法的上下文对象为opts|
 |initPage(currentPage)|回调函数|默认做了什么,请看原码|从服务器获得数据的方式,然后执行写入数据,上下文对象为opts|
 |triggerEvent(ts,evt)|回调函数|默认做了什么,请看原码|触发`P.Index`的事件要做的事情. 注意:该方法的上下文对象是opts,ts:表示事件触发源的对象;evt:表示事件对象|
-|pageIndex(numberShowCount,currentPage,totalpage)|回调函数|默认做了什么,请看原码|计算开始页和结束页.参数说明:numberShowCount:(必选项)页面中要显示的页面个数;currentPage:(必选项)当前页;totalpage:(必选项)总页面数 返回格式: {"startpage" : startpage,"endpage":endpage}|
+|pageIndex(indexNum,<br />currentPage,totalpage)|回调函数|默认做了什么,请看原码|计算开始页和结束页.参数说明:indexNum:(必选项)指定在分页控制区中显示分页索引的个数(不包含"N...","...N"或"箭头");currentPage:(必选项)当前页;totalpage:(必选项)总页面数 返回格式: {"startpage" : startpage,"endpage":endpage}|
 |queryParam(href,name)|回调函数|默认做了什么,请看原码|从一个参数地址中查询出一个参数的值.举例: 从a=1&b=2&c=3查出c的值. 写法:queryParam("a=1&b=2&c=3","c") 得出3.参数说明:href:(必选项)url地址;name:(必选项)参数的名称.返回: 参数值,如果没有找到返回""|
-
-
-文档待续...  ...
 
 
 

@@ -70,6 +70,3 @@ var pjaxPage = $.pjaxPage({
 			}
 });
 
-pjaxPage.clearPageCache();
-
-
