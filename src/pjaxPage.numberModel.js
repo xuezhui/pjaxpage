@@ -17,7 +17,7 @@
         	// 分页模型的可选配置选项的默认值
             var defaults = {
                 activeName: "active",             // (默认:active) 触发后的页码样式
-                pageContainer: $("#pageCodeBox"), // (可选项) 用于存放页码的容器
+                pageCodeBox: $("#pageCodeBox"), // (可选项) 用于存放页码的容器
                 indexNum:5                        // (可选项) 指定在分页控制区中显示分页索引的个数(不包含"..."或"箭头")
             };
             
@@ -120,7 +120,7 @@
           }
         
          // 写入到dom
-         opts.pageContainer.html(pageMenu);
+         opts.pageCodeBox.html(pageMenu);
 
          return opts;
                 

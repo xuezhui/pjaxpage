@@ -85,36 +85,94 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 定义名,如下图所示:  
 ![定义名](https://xixifeng.github.io/pjaxpage/example/img/names.png "定义名")  
 
+## 5. pageData
+数据结构:  
+```javascript
+{
+	"content":[                // 这页的数据
+		{
+			"name":"查尔斯·巴贝奇","id":2,"year":1792
+		},
+		{
+			"name":"约翰·冯·诺依曼","id":3,"year":1903
+		},
+		{                     
+			"name":"阿兰·麦席森·图灵","id":1,"year":1912
+		},
+		{
+			"name":"约翰·麦卡锡","id":4,"year":1927
+		},
+		{
+			"name":"丹尼斯·里奇","id":5,"year":1941
+		},
+		{
+			"name":"蒂姆·伯纳斯·李","id":6,"year":1955
+		}
+	],
+    "first": true,           	// 是否是第一页
+    "hasContent": true,      	// 这页是否有数据
+    "hasNext": true,         	// 是否有下一页
+    "hasPrevious": false,    	// 是否有上一页
+    "last": false,           	// 是否是最后一页
+    "nextPageable": {        	// 下一页的基本属性
+        "number": 1,         	// 定位的页码
+        "size": 15           	// 每页多少条数据
+    },
+    "number": 1,             	// 当前页码,从1开始
+    "numberOfElements": 6,  	// 当前页的真实记录行数
+    "previousPageable": {    	// 上一页的基本属性
+        "number": 0,         	// 定位的页码
+        "size": 15           	// 每页多少条数据
+    },
+    "size": 15,              	// 每页行数
+    "totalElements": 188,    	// 总行数
+    "totalPages": 13         	// 总页数
+}
+```
+
+[FastQuery](https://gitee.com/xixifeng.com/fastquery)项目中的`Page`实例转换成`JSON`后就是这种结构.本项目自带的分页模型都基于`pageData`结构. 当然,也可以自定义数据结构.  
 
 ## 5. pjaxPage配置选项(opts)
 
 | 属性 | 类型 | 默认值 | 描述 |
 |:-----|:-----|:-----|:-----|
-|`ajax`|jQuery对象|{}|jQuery的ajax的配置(settings),支持jQuery.ajax所有的配置选项.注意:不用设置请求data和success函数.ajax的settings,请参照jQuery官方说明|
-|`size`|正整数|15|用于指定`P.Slice`(页片)显示多少条记录.换言之,指定每页显示多少条记录|
-|`currentPage`|正整数|1|用于指定当前页的`P.Index`(分页索引),例如:把currentPage设置为N,那么就显示第N页|
-|`dataListBox`|<nobr>jQuery对象</nobr>|`$("#dataListBox")`|用于装载`P.Slice`的盒子|
-|`pageCodeBox`|jQuery对象|`$("#pageCodeBox")`|用于装载`P.Ctrl`的盒子|
-|`pageModel`|JSON对象| {name:"numberModel"}|用于配置分页模型,开发者扩展扩展自己的分页模型.`numberModel`的可选参数,请参阅分页模型章节|
-|`createDataHtml(data)`|回调函数|返回""|共:1个参数. 第1个参数是ajax成功请求所响应的数据.该函数的作用:创建当前`P.Slice`的HTML代码,并返回|
-|`notFoundTip`|字符串|Not Found Data!|翻页时如果没有找到数据,会将此选项设置的值写入到用于装载`P.Slice`的盒子里,支持HTML|
+|`ajax`|Object|{}|jQuery的ajax的配置(settings),支持jQuery.ajax所有的配置选项.注意:不用设置请求data和success函数.ajax的settings,请参照jQuery官方说明|
+|`size`|int|15|用于指定`P.Slice`(页片)显示多少条记录.换言之,指定每页显示多少条记录|
+|`currentPage`|int|1|用于指定当前页的`P.Index`(分页索引),例如:把currentPage设置为N,那么就显示第N页|
+|`dataListBox`|jQuery|`$("#dataListBox")`|用于装载`P.Slice`的盒子|
+|`pageCodeBox`|jQuery|`$("#pageCodeBox")`|用于装载`P.Ctrl`的盒子|
+|`pageModel`|JSON| {name:"numberModel"}|用于配置分页模型,开发者扩展扩展自己的分页模型.`numberModel`的可选参数,请参阅分页模型章节|
+|`createDataHtml(data)`|callback function|返回""|共:1个参数. 第1个参数是ajax成功请求所响应的数据.该函数的作用:创建当前`P.Slice`的HTML代码,并返回|
+|`notFoundTip`|String|Not Found Data!|翻页时如果没有找到数据,会将此选项设置的值写入到用于装载`P.Slice`的盒子里,支持HTML|
 |`pageCodeItem`|`HTML元素`|a[tabindex]|`P.Index`的HTML元素选择器|
-|`eventName`|字符串|click|`P.Index`的事件名称.默认`click`,表示单击分页索引就翻页,若设置为`dblclick`,表示双击分页索引,才能翻页.当然,也可以基于jQuery自定义一个事件|
-|`dataCache`|布尔|true|是否采用jQuery的data函数缓存`P.Slice`(页片)数据|
-|`clear()`|回调函数|清除所有页片缓存|清除所有页片缓存|
-|`writeListBefore()`|回调函数|不做什么|数据列表写入倒dom之前,该方法的上下文对象(this)对象是pjaxPage的opts|
-|`writeListAfter(data)`|回调函数|不做什么|数据列表写入倒dom之后,data为服务器响应的数据,该方法的上下文对象(this)为opts|
-|`getReqParam(currentPage)`|回调函数|---|获取请求参数,注意:它的上下文对象为opts, currentPage表示当前页|
+|`eventName`|String|click|`P.Index`的事件名称.默认`click`,表示单击分页索引就翻页,若设置为`dblclick`,表示双击分页索引,才能翻页.当然,也可以基于jQuery自定义一个事件|
+|`dataCache`|boolean|true|是否采用jQuery的data函数缓存`P.Slice`(页片)数据|
+|`clear()`|callback function|清除所有页片缓存|清除所有页片缓存|
+|`writeListBefore()`|callback function|不做什么|数据列表写入倒dom之前,该方法的上下文对象(this)对象是pjaxPage的opts|
+|`writeListAfter(data)`|callback function|不做什么|数据列表写入倒dom之后,data为服务器响应的数据,该方法的上下文对象(this)为opts|
+|`getReqParam(currentPage)`|callback function|---|获取请求参数,注意:它的上下文对象为opts, currentPage表示当前页|
 |`activeName`|字符串|active|`P.Index`被触发后的class样式选择器的名称|
 |`pjaxId`|字符串|xixifeng_pjax|pjax ID 会显示在浏览器地址栏上|
-|`enabledPjax`|布尔|true|是否启用pjax功能|
-|`pageHrefPre`|字符串|---|`P.Index`链接地址的前缀|
-|`writeData(data,currentPage)`|回调函数|---|写入数据,data为服务响应的数据,currentPate当前页,注意,此方法的上下文对象为opts|
-|`initPage(currentPage)`|回调函数|---|从服务器获得数据的方式,然后执行写入数据,上下文对象为opts|
-|`triggerEvent(ts,evt)`|回调函数|---|触发`P.Index`的事件要做的事情. 注意:该方法的上下文对象是opts,ts:表示事件触发源的对象;evt:表示事件对象|
-|pageIndex(indexNum,<br>currentPage,totalpage)|回调函数|---|计算开始页和结束页.参数说明:indexNum:(必选项)指定在分页控制区中显示分页索引的个数(不包含"N+...","...N+"或"箭头");currentPage:(必选项)当前页;totalpage:(必选项)总页面数 返回格式: {"startpage" : startpage,"endpage":endpage}|
-|`queryParam(href,name)`|回调函数|---|从一个参数地址中查询出一个参数的值.举例: 从a=1&b=2&c=3查出c的值. 写法:queryParam("a=1&b=2&c=3","c") 得出3.参数说明:href:(必选项)url地址;name:(必选项)参数的名称.返回: 参数值,如果没有找到返回""|
+|`enabledPjax`|boolean|true|是否启用pjax功能|
+|`pageHrefPre`|String|---|`P.Index`链接地址的前缀|
+|`writeData(data,currentPage)`|callback function|---|写入数据,data为服务响应的数据,currentPate当前页,注意,此方法的上下文对象为opts|
+|`initPage(currentPage)`|callback function|---|从服务器获得数据的方式,然后执行写入数据,上下文对象为opts|
+|`triggerEvent(ts,evt)`|callback function|---|触发`P.Index`的事件要做的事情. 注意:该方法的上下文对象是opts,ts:表示事件触发源的对象;evt:表示事件对象|
+|`pageIndex(indexNum,`<br>`currentPage,totalpage)`|callback function|---|计算开始页和结束页.参数说明:indexNum:(必选项)指定在分页控制区中显示分页索引的个数(不包含"N+...","...N+"或"箭头");currentPage:(必选项)当前页;totalpage:(必选项)总页面数 返回格式: {"startpage" : startpage,"endpage":endpage}|
+|`queryParam(href,name)`|callback function|---|从一个参数地址中查询出一个参数的值.举例: 从a=1&b=2&c=3查出c的值. 写法:queryParam("a=1&b=2&c=3","c") 得出3.参数说明:href:(必选项)url地址;name:(必选项)参数的名称.返回: 参数值,如果没有找到返回""|
 
+## 6. 分页模型 
+### 6.1 `pjaxPage.numberModel.js`
+配置选项(opts):
+
+| 属性 | 类型 | 默认值 | 描述 |
+|:-----|:-----|:-----|:-----|
+|`activeName`|String|active|`P.Index`被触发后的class样式选择器的名称|
+|`pageCodeBox`|jQuery|`$("#pageCodeBox")`|用于装载`P.Ctrl`的盒子|
+|`indexNum`|int|5|指定在分页控制区中显示分页索引的个数(不包含"N+...","...N+"或"箭头")|
+
+例子:  
+[http://xixifeng.com.oschina.io/pjaxpage/example/](http://xixifeng.com.oschina.io/pjaxpage/example/) 
 
 
 
