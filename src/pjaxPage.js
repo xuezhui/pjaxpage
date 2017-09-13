@@ -71,7 +71,7 @@
                             {   
                                     // 缓存从服务端过来的当前data 键名为: "pageCode" + this.currentPage, 如果没有缓存就缓存
                                     // 保存缓存
-                                    this.dataListBox.data("pageCode" + this.currentPage, data);
+                                    this.dataListBox.data("pageCode" + this.currentPage, this.data);
                             }
                             //====================================如果启用了pjax================================================     
                             if(this.enabledPjax) { 

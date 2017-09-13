@@ -23,8 +23,13 @@ var pjaxPage = $.pjaxPage({
 			pageModel: {
 				name : "numberModel",
 				opts : {
-					indexNum: 7
-					}
+					indexNum: 7,
+	                home : "首页",
+	                prev : "上一页",
+	                next : "下一页",
+	                end : "末页",
+	                showEllipsis : false
+				}
 			},
 			enabledPjax : true,
 			dataCache : true,
