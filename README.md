@@ -22,13 +22,15 @@ Here is the minimal HTML code to get pages working:
 ```
 
 ###  1.3 JS Setup
+
+如果采用本插件提供的分页模型,服务端响应的数据的格式必须为`{pageData:{...},...}`, 熟悉[pageData数据结构](#5-pagedata).  
 ```javascript
 $.pjaxPage({
 
 	// ajax 配置.支持jQuery.ajax所有的配置选项.ajax的settings,请参照jQuery官方说明
 	ajax : {
 		url : "https://your.damain.com",
-		dataType : "jsonp", // json or jsonp type
+		dataType : "jsonp", // 支持"xml","html","script","json","jsonp","text"...等等
 	},
 	
 	// 拼接分页数据,并返回
@@ -41,11 +43,11 @@ $.pjaxPage({
 		var dataHtml = '';
 		for (var i = 0; i < total; i++) {
 			
-			var cizu = content[i].cizu.replace(/"/g,"");
+			var cizu = content[i].cizu;
 			var pinyin = content[i].pinyin;
 			var options = content[i].options;
-			var ok = content[i].ok.replace(/"/g,"");
-			var info = content[i].info.replace(/"/g,"");
+			var ok = content[i].ok;
+			var info = content[i].info;
 			
 			dataHtml += '<tr>';
 			dataHtml += '	<td>' + cizu + '</td>';
@@ -168,9 +170,8 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |`page`|int|告诉服务端要请求的是第几页|
 |`size`|int|告诉服务端当前页需要多少记录|
 
-举例说明:  
-若page=3,size=10时, `pajxPage`内部会发出请求`https://your.damain.com?page=3&size=10`,表示获取第3页,期望这页是10条数据组成.        
-`page`和`size`这两个内置请求参数,因为不需要开发者维护,更不需要人为指定.所以,有可能跟设计的业务参数有冲突.因此,这两个内置参数允许开发者自行修改,是有意义的.若在pjaxPage配置选项里把`pageKeyName`设置为"pageIndex",`sizeKeyName`设置为"recordNum".同样的需求,pajxPage内部会发出请求`https://your.damain.com?pageIndex=3&recordNum=10`,从而,避开`page`和`size`这两个参数.   
+自定义请求参数名称,举例说明:  
+若page=3,size=10时, `pajxPage`内部会发出请求`https://your.damain.com?page=3&size=10`,表示获取第3页,期望这页是10条数据组成.`page`和`size`这两个内置请求参数,因为不需要开发者维护,更不需要人为指定.所以,有可能跟设计的业务参数有冲突.因此,这两个内置参数允许开发者自行修改,是有意义的.若在pjaxPage配置选项里把`pageKeyName`设置为"pageIndex",`sizeKeyName`设置为"recordNum".同样的需求,pajxPage内部会发出请求`https://your.damain.com?**pageIndex**=3&**recordNum**=10`,从而,避开`page`和`size`这两个参数.   
 
 ## 8. 分页模型 
 ### 8.1 `pjaxPage.numberModel.js`
@@ -178,7 +179,7 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 
 | 属性 | 类型 | 默认值 | 描述 |
 |:-----|:-----|:-----|:-----|
-|`activeName`|String|active|`P.Index`被触发后的class样式选择器的名称|
+|`activeName`|<nobr>String</nobr>|<nobr>active</nobr>|`P.Index`被触发后的class样式选择器的名称|
 |`indexNum`|int|5|指定在分页控制区中显示分页索引的个数(不包含"N+...","...N+"或"箭头"),建议设置值是一个奇数,可以让当前触发索引位于中间,那样好看些|
 
 例子:  

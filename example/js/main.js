@@ -27,7 +27,7 @@ var pjaxPage = $.pjaxPage({
 					}
 			},
 			enabledPjax : true,
-			dataCache : false,
+			dataCache : true,
 			writeListBefore : function() {
 
 			},
