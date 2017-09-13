@@ -19,6 +19,7 @@ var pjaxPage = $.pjaxPage({
 				error : function() {
 				}
 			},
+			size : 10,
 			pageModel: {
 				name : "numberModel",
 				opts : {
@@ -72,4 +73,5 @@ var pjaxPage = $.pjaxPage({
 				return dataHtml;
 			}
 });
+
 

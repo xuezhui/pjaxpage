@@ -13,9 +13,12 @@
    
     $.extend({     
             pjaxPage:function(options) {
+       		 var successFnStr = "", dataStr = "";
              var defaults = {
             		 ajax: {},                               // jQuery的ajax的配置(settings), 注意:不用设置data和success函数. 在这里支持jQuery.ajax所有的配置选项.// ajax的settings,请参照jQuery官方说明
                      size : 15,                              // (默认值:15)每页显示多少条数据
+                     pageKeyName: "page",
+                     sizeKeyName: "size",
                      currentPage: 1,                         // (默认值:1)设置默认当前页      
                      dataListBox: $("#dataListBox"),         // (默认值:$("#dataListBox"))用于装分页数据的盒子               
                      pageCodeBox: $("#pageCodeBox"),         // (默认值:$("#pageCodeBox"))用于装分页码(分页控制区)的盒子
@@ -95,12 +98,40 @@
                             
                             // 将 data转换"&foo=bar1&foo=bar2"格式
                             var dt  = contextObj.getReqParam.call(contextObj);
-                             
+                           
                             var ajaxSettings = this.ajax;
+                            if(successFnStr === "") { // 确保只赋值一次
+                            	if(!ajaxSettings.success) {
+                                	successFnStr = "N";
+                            	} else {
+                                	successFnStr = ajaxSettings.success + "";
+                            	}
+                            }
+                            if(dataStr === "") { // 确保只赋值一次
+                            	if(!ajaxSettings.data){
+                                	dataStr = "N";	
+                            	} else {
+                            		if($.type(ajaxSettings.data)==="string") {
+                            			dataStr = ajaxSettings.data + "";	
+                            		} else {
+                            			dataStr = $.param(ajaxSettings.data) + "";	
+                            		}
+                            	}
+                            }
+                            //alert("successFnStr=" + successFnStr +",dataStr="+dataStr);
                             ajaxSettings.data = $.type(dt)==="string"?dt:$.param(dt);
-                            ajaxSettings.success = function(data) {
+   						    if(dataStr !== "N") {
+   						    	ajaxSettings.data = ajaxSettings.data+"&"+dataStr;
+   						    }
+   						    ajaxSettings.data = ajaxSettings.data.replace("page=",this.pageKeyName+"=").replace("size=",this.sizeKeyName+"=");
+                            ajaxSettings.success = function(data,textStatus,jqXHR) {
                             	contextObj.data = data;
+                            	contextObj.textStatus = textStatus;
+                            	contextObj.jqXHR = jqXHR;
        						    contextObj.writeData.call(contextObj);
+       						    if(successFnStr !== "N") {
+           						   eval("("+successFnStr+")(contextObj.data,contextObj.textStatus,contextObj.jqXHR);");
+       						    }
         					};
         					// 执行ajax
         					$.ajax(ajaxSettings);
