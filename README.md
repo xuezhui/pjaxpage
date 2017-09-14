@@ -187,21 +187,28 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 
 ## 8. 分页模型 
 ### 8.1 `pjaxPage.numberModel.js`
+![pjaxPage.numberModel](https://xixifeng.github.io/pjaxpage/example/img/numberModel.png "pjaxPage.numberModel")  
 配置选项(opts):
 
 | 属性 | 类型 | 默认值 | 描述 |
 |:-----|:-----|:-----|:-----|
 |`activeName`|`String`|`active`|`P.Index`被触发后的class样式选择器的名称|
 |`indexNum`|`int`|5|指定在分页控制区中显示分页索引的个数(不包含"N+...","...N+"或"箭头"),建议设置值是一个奇数,可以让当前触发索引位于中间,那样好看些|
-|`home`|`String`|`"&lt;&lt;"`<br>"<<"的HTML代码|表示**首页**用什么字符串标识|
-|`prev`|`String`|`"&lt;"`<br>"<"的HTML代码|表示**上一页**用什么字符串标识|
-|`next`|`String`|`"&gt;"`<br>">"的HTML代码|表示**下一页**用什么字符串标识|
-|`end`|`String`|`"&gt;&gt;"`<br>">>"的HTML代码|表示**末页**用什么字符串标识|
-|`showEllipsis`|`boolean`|true|是否在分页控制区显示省略号(...)|
+|`home`|`String`|`"&lt;&lt;"`<br>"<<" HTML|表示**首页**用什么字符串标识|
+|`prev`|`String`|`"&lt;"`<br>"<" HTML|表示**上一页**用什么字符串标识|
+|`next`|`String`|`"&gt;"`<br>">" HTML|表示**下一页**用什么字符串标识|
+|`end`|`String`|`"&gt;&gt;"`<br>">>" HTML|表示**末页**用什么字符串标识|
+|`showEllipsis`|`boolean`|true|是否在分页控制区显示**省略号**(...)|
 
+### 8.2 `pjaxPage.singleModel.js`
+![pjaxPage.singleModel](https://xixifeng.github.io/pjaxpage/example/img/singleModel.png "pjaxPage.singleModel")  
+这个分页模型,只有一个按钮,特点:下一页到尽头了,允许回到上一页. 上一页到尽头了允许回到下一页.     
+配置选项(opts):
 
-例子:  
-[http://xixifeng.com.oschina.io/pjaxpage/example/](http://xixifeng.com.oschina.io/pjaxpage/example/) 
+| 属性 | 类型 | 默认值 | 描述 |
+|:-----|:-----|:-----|:-----|
+|`prev`|`String`|"上一页"|表示**上一页**用什么字符串标识|
+|`next`|`String`|"下一页"|表示**下一页**用什么字符串标识|
 
 ## 9. 开发分页模型
 文档待续...
