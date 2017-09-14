@@ -165,6 +165,7 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 ### 内置模板标签
 
 | 标签名 | 描述 |
+|:-----|:-----|
 |`{totalElements}`|数据总记录数|
 |`{currentPage}`|当前页索引|
 |`{totalPages}`|总页数|
