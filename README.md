@@ -188,6 +188,18 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 ## 8. 分页模型 
 ### 8.1 `pjaxPage.numberModel.js`
 ![pjaxPage.numberModel](https://xixifeng.github.io/pjaxpage/example/img/numberModel.png "pjaxPage.numberModel")  
+```html
+<ul class="pagination">
+	<li><a href="#">首页</a></li>
+	<li><a href="#">上一页</a></li>
+	<li><a href="#">4</a></li>
+	<li class="active"><a href="#">5</a></li>
+	<li><a href="#">6</a></li>
+	<li><a href="#">下一页</a></li>
+	<li><a href="#">末页</a></li>
+</ul>
+```
+
 配置选项(opts):
 
 | 属性 | 类型 | 默认值 | 描述 |
@@ -202,6 +214,12 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 
 ### 8.2 `pjaxPage.singleModel.js`
 ![pjaxPage.singleModel](https://xixifeng.github.io/pjaxpage/example/img/singleModel.png "pjaxPage.singleModel")  
+```html
+<ul class="pagination">
+	<li><a href="#">下一页</a></li>
+</ul>
+```
+
 这个分页模型,只有一个按钮,特点:下一页到尽头了,允许回到上一页. 上一页到尽头了允许回到下一页.     
 配置选项(opts):
 
