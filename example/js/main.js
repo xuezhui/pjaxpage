@@ -31,6 +31,7 @@ var pjaxPage = $.pjaxPage({
 	                showEllipsis : false
 				}
 			},
+			pageInfoTpl: '<div class="leftlabel">共<b>{totalElements}</b>条记录, 总共有<b>{totalPages}</b>页</div>',
 			enabledPjax : true,
 			dataCache : true,
 			writeListBefore : function() {

@@ -145,10 +145,11 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |`currentPage`|int|1|用于指定当前页的`P.Index`(分页索引),例如:把currentPage设置为N,那么就显示第N页|
 |`dataListBox`|jQuery|`$("#dataListBox")`|用于装载`P.Slice`的盒子|
 |`pageCodeBox`|jQuery|`$("#pageCodeBox")`|用于装载`P.Ctrl`的盒子|
+|`pageInfoTpl`|String|"&lt;p&gt;共{totalElements}条记录,当前页:{currentPage}/{totalPages}&lt;/p&gt;"|`P.Info`(分页概述)模板,它会被`pageCodeBox`包裹.[内置模板标签](#内置模板标签)详情|
 |`pageModel`|JSON| {name:"numberModel"}|用于配置分页模型,开发者扩展扩展自己的分页模型.`numberModel`的可选参数,请参阅分页模型章节|
 |`createDataHtml(data)`|`callback function`|---|共:1个参数. 第1个参数是ajax成功请求所响应的数据.该函数的作用:创建当前`P.Slice`的HTML代码,并返回|
 |`notFoundTip`|String|"Not Found Data!"|翻页时如果没有找到数据,会将此选项设置的值写入到用于装载`P.Slice`的盒子里,支持HTML|
-|`pageCodeItem`|HTML<br>element|a[tabindex]|`P.Index`的HTML元素选择器|
+|`pageCodeItem`|HTML<br>element|"a[tabindex]"|`P.Index`的HTML元素选择器|
 |`eventName`|String|"click"|`P.Index`的事件名称.默认`click`,表示单击分页索引就翻页,若设置为`dblclick`,表示双击分页索引,才能翻页.当然,也可以基于jQuery自定义一个事件|
 |`dataCache`|boolean|true|是否采用jQuery的data函数缓存`P.Slice`(页片)数据,该缓存生命周期很短,只要用户刷新浏览器(F5)或关闭浏览器,缓存的数据立马消失|
 |`clear()`|`callback function`|---|清除所有页片缓存|
@@ -160,6 +161,14 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |`pageHrefPre`|String|---|`P.Index`链接地址的前缀|
 |`pageIndex(indexNum,`<br>`currentPage,totalpage)`|`callback function`|---|计算开始页和结束页.参数说明:indexNum:(必选项)指定在分页控制区中显示分页索引的个数(不包含"N+...","...N+"或"箭头");currentPage:当前分页索引;totalpage:(必选项)总页面数 返回格式: {"startpage" : startpage,"endpage":endpage}|
 |`queryParam(href,name)`|`callback function`|---|从一个参数地址中查询出一个参数的值.举例: 从a=1&b=2&c=3查出c的值. 写法:queryParam("a=1&b=2&c=3","c") 得出3.参数说明:href:(必选项)url地址;name:(必选项)参数的名称.返回: 参数值,如果没有找到返回""|
+
+### 内置模板标签
+
+| 标签名 | 描述 |
+|`{totalElements}`|数据总记录数|
+|`{currentPage}`|当前页索引|
+|`{totalPages}`|总页数|
+
 
 ## 7. 自定义请求参数
 
@@ -181,17 +190,17 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |:-----|:-----|:-----|:-----|
 |`activeName`|`String`|`active`|`P.Index`被触发后的class样式选择器的名称|
 |`indexNum`|`int`|5|指定在分页控制区中显示分页索引的个数(不包含"N+...","...N+"或"箭头"),建议设置值是一个奇数,可以让当前触发索引位于中间,那样好看些|
-|`home`|`String`|`"&lt;&lt;"`|表示**首页**用什么字符串标识|
-|`prev`|`String`|`"&lt;"`|表示**上一页**用什么字符串标识|
-|`next`|`String`|`"&gt;"`|表示**下一页**用什么字符串标识|
-|`end`|`String`|`"&gt;&gt;"`|表示**末页**用什么字符串标识|
+|`home`|`String`|`"&lt;&lt;"`<br>"<<"|表示**首页**用什么字符串标识|
+|`prev`|`String`|`"&lt;"`<br>"<"|表示**上一页**用什么字符串标识|
+|`next`|`String`|`"&gt;"`<br>">"|表示**下一页**用什么字符串标识|
+|`end`|`String`|`"&gt;&gt;"`<br>">>"|表示**末页**用什么字符串标识|
 |`showEllipsis`|`boolean`|true|是否在分页控制区显示省略号(...)|
 
 
 例子:  
 [http://xixifeng.com.oschina.io/pjaxpage/example/](http://xixifeng.com.oschina.io/pjaxpage/example/) 
 
-## 9. 如何开发分页模型
+## 9. 开发分页模型
 文档待续...
 
 

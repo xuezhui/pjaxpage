@@ -70,7 +70,7 @@
             
             if(totalPage>0){
             	
-                pageMenu += '<div class="leftlabel">共<strong>' + totalElements + '</strong>条记录, 当前为第<strong>' + number + '</strong>页</div>';
+                pageMenu += $.tpl(pjaxPageObj.pageInfoTpl,{totalElements:totalElements,currentPage:number,totalPages:totalPage});
                 pageMenu +=  '<ul class="pagination">';
                 // 不是第一页时，显示首页
                if (!first) {  //等价 number > 1

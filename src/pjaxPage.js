@@ -11,7 +11,14 @@
  */
 (function($){
    
-    $.extend({     
+    $.extend({
+    	    tpl: function(template, data) {
+    	    	  return template.replace(/\{([\w\.]*)\}/g, function(str, key) {
+    	    		    var keys = key.split("."), v = data[keys.shift()];
+    	    		    for (var i = 0, l = keys.length; i < l; i++) v = v[keys[i]];
+    	    		    return (typeof v !== "undefined" && v !== null) ? v : "";
+    	    		  });
+    	    },
             pjaxPage:function(options) {
        		 var successFnStr = "", dataStr = "";
              var defaults = {
@@ -22,6 +29,7 @@
                      currentPage: 1,                         // (默认值:1)设置默认当前页      
                      dataListBox: $("#dataListBox"),         // (默认值:$("#dataListBox"))用于装分页数据的盒子               
                      pageCodeBox: $("#pageCodeBox"),         // (默认值:$("#pageCodeBox"))用于装分页码(分页控制区)的盒子
+                     pageInfoTpl: "<p>共{totalElements}条记录,总页数:{totalPages}</p>",
                      pageModel : {
          				name : "numberModel"                 // (默认:numberModel) 分页模型的名称
                      },     
