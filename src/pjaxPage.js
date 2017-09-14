@@ -29,11 +29,17 @@
                      currentPage: 1,                         // (默认值:1)设置默认当前页      
                      dataListBox: $("#dataListBox"),         // (默认值:$("#dataListBox"))用于装分页数据的盒子               
                      pageCodeBox: $("#pageCodeBox"),         // (默认值:$("#pageCodeBox"))用于装分页码(分页控制区)的盒子
-                     pageInfoTpl: "<p>共{totalElements}条记录,总页数:{totalPages}</p>",
+                     pageInfoTpl: "<p>共{totalElements}条记录,总页数:{totalPages}</p>", // 分页摘要
+                     buildTplSource : function(data,textStatus,jqXHR){               // 构建模板数据源
+                    	 return { 
+                    		 totalElements:data.pageData.totalElements,
+                    		 currentPage:data.pageData.number,
+                    		 totalPages:data.pageData.totalPages};
+                     },
                      pageModel : {
          				name : "numberModel"                 // (默认:numberModel) 分页模型的名称
                      },     
-                     createDataHtml:function(data){          // 创建当前页html代码,并返回
+                     createDataHtml:function(data,textStatus,jqXHR){          // 创建当前页html代码,并返回
                          return "";
                      },                                      
                      notFoundTip : "Not Found Data!",        // (默认:Not Found Data!)如果没有找到数据,会将此选项设置的值写入到用于装数据列表的盒子里.支持html语法     
@@ -42,10 +48,11 @@
                      dataCache : true,                       // 是否用jQuery的data缓存数据, 默认允许
                      clear : function(){                     // 清除缓存
                     	this.dataListBox.removeData();
+                    	return this;
                      },
                      writeListBefore: function(){            // 数据列表写入倒dom之前,该方法的上下文对象为opts
                      },          
-                     writeListAfter: function(data){         // 数据列表写入倒dom之后,data为服务器响应的数据,该方法的上下文对象为opts
+                     writeListAfter: function(data,textStatus,jqXHR){         // 数据列表写入倒dom之后,data为服务器响应的数据,该方法的上下文对象为opts
                      },       
                      getReqParam: function(){  // 获取请求参数,注意:它的上下文对象为opts
                     	 var params = {
@@ -62,9 +69,10 @@
                          
      
                      writeData : function(){          // 写入数据.注意,此方法的上下文对象为opts
-                            var dataHtml = this.createDataHtml(this.data); // 数据列表的html
+                            var dataHtml = this.createDataHtml.call(this,this.data,this.textStatus,this.jqXHR); // 数据列表的html
                             var pageModelName = this.pageModel.name;  // 获得分页模型的名称
                             var modelMethod = $[pageModelName];       // 根据名称获得分页模型函数(这有点类似java的反射)
+                            this.pageInfo = $.tpl(this.pageInfoTpl,this.buildTplSource.call(this,this.data,this.textStatus,this.jqXHR));
                             modelMethod.call(this);                   // 调用分页模型函数
                             
                             if(dataHtml==""||dataHtml==null) {
@@ -89,7 +97,7 @@
                               });
                             }
                             //========================================如果启用了pjax End============================================  
-                            this.writeListAfter.call(this,this.data);  // 真正写入后  
+                            this.writeListAfter.call(this,this.data,this.textStatus,this.jqXHR);  // 真正写入之后  
                         },
                         
                         

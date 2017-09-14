@@ -31,7 +31,6 @@
             
             var opts = $.extend(defaults, pjaxPageObj.pageModel.opts);
             
-            var totalElements = data.totalElements; // 待分页总数据量
             var number = data.number;           // 当前是第几页
             var totalPage = data.totalPages;        // 总页数
             
@@ -70,7 +69,7 @@
             
             if(totalPage>0){
             	
-                pageMenu += $.tpl(pjaxPageObj.pageInfoTpl,{totalElements:totalElements,currentPage:number,totalPages:totalPage});
+                pageMenu += pjaxPageObj.pageInfo;
                 pageMenu +=  '<ul class="pagination">';
                 // 不是第一页时，显示首页
                if (!first) {  //等价 number > 1

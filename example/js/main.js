@@ -50,7 +50,7 @@ var pjaxPage = $.pjaxPage({
 				return $.param(params); // 分页查询参数
 			},
 
-			createDataHtml : function(data) { // 在此仅需拼接分页数据 然后return 即可
+			createDataHtml : function(data,textStatus,jqXHR) { // 在此仅需拼接分页数据 然后return 即可
 				var content = data.pageData.content;
 				var total = content.length;
 				if (total == 0)
