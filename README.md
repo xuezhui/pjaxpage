@@ -1,4 +1,9 @@
+
+- [Download the compressed, production pjaxPage 1.0](https://xixifeng.github.io/pjaxpage/lib/1.0/min/pjaxPageModels-1.0.min.tar.gz "pjaxPage")
+- [Download the uncompressed, development pjaxPage 1.0](https://xixifeng.github.io/pjaxpage/lib/1.0/dev/pjaxPageModels-1.0.dev.tar.gz "pjaxPage")
+
 ## 1. Quick Start
+
 ### 1.1 HTML Code
 Here is the minimal HTML code to get pages working: 
 ```html
@@ -228,7 +233,7 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |`prev`|`String`|"上一页"|表示**上一页**用什么字符串标识|
 |`next`|`String`|"下一页"|表示**下一页**用什么字符串标识|
 
-## 9. 开发分页模型
+## 9. 怎样扩展分页模型?
 文档待续...
 
 
