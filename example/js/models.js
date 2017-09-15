@@ -4,10 +4,10 @@ model.numberModel =  {
 		name : "numberModel",
 		opts : {
 			indexNum: 7,
-            home : "首页",
-            prev : "上一页",
-            next : "下一页",
-            end : "末页",
+            home : "Home",
+            prev : "Prev",
+            next : "Next",
+            end : "End",
             showEllipsis : false
 		}
 };
@@ -15,7 +15,17 @@ model.numberModel =  {
 model.singleModel =  {
 		name : "singleModel",
 		opts : {
-	        prev : "上一页",
-	        next : "下一页"
+	        prev : "Prev",
+	        next : "Next"
+		}
+};
+
+model.textModel =  {
+		name : "textModel",
+		opts : {
+            home : "Home",
+            prev : "Prev",
+            next : "Next",
+            end : "End"
 		}
 };

@@ -233,8 +233,25 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |`prev`|`String`|"上一页"|表示**上一页**用什么字符串标识|
 |`next`|`String`|"下一页"|表示**下一页**用什么字符串标识|
 
-## 9. 怎样扩展分页模型?
-文档待续...
+### 8.3 `pjaxPage.textModel.js`
+![pjaxPage.singleModel](https://xixifeng.github.io/pjaxpage/example/img/singleModel.png "pjaxPage.textModel")  
+```html
+<ul class="pagination">
+	<li><a href="#">首页</a></li>
+	<li><a href="#">上一页</a></li>
+	<li><a href="#">下一页</a></li>
+	<li><a href="#">末页</a></li>
+</ul>
+```
+
+配置选项(opts):
+
+| 属性 | 类型 | 默认值 | 描述 |
+|:-----|:-----|:-----|:-----|
+|`home`|`String`|"首页"|表示**首页**用什么字符串标识|
+|`prev`|`String`|"上一页"|表示**上一页**用什么字符串标识|
+|`next`|`String`|"下一页"|表示**下一页**用什么字符串标识|
+|`end`|`String`|"末页"|表示**末页**用什么字符串标识|
 
 
   

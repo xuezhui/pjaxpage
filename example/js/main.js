@@ -24,14 +24,14 @@ var pjaxPage = $.pjaxPage({
 				name : "numberModel",
 				opts : {
 					indexNum: 7,
-	                home : "首页",
-	                prev : "上一页",
-	                next : "下一页",
-	                end : "末页",
+		            home : "Home",
+		            prev : "Prev",
+		            next : "Next",
+		            end : "End",
 	                showEllipsis : false
 				}
 			},
-			pageInfoTpl: '<div class="leftlabel">共<b>{totalElements}</b>条记录, 总共有<b>{totalPages}</b>页</div>',
+			pageInfoTpl: '<div class="leftlabel">A total of <b>{totalElements}</b> records, a total of <b>{totalPages}</b> pages</div>',
 			enabledPjax : true,
 			dataCache : true,
 			writeListBefore : function() {

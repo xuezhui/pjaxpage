@@ -7,18 +7,18 @@
  * Copyright JS Foundation and other contributors
  * Released under the MIT license
  *
- * Date: 2017-05-18
+ * Date: 2017-09-15
  */
 (function($) {
-	var isUp = false;
 	$.extend({
-		singleModel : function(){
+		textModel : function(){
 			
 			// 分页模型的可选配置选项的默认值
             var defaults = {
-                activeName : "active",             // (默认:active) 触发后的页码样式
-                prev : "上一页",
-                next : "下一页"
+                    home : "&lt;&lt;",
+                    prev : "&lt;",
+                    next : "&gt;",
+                    end : "&gt;&gt;"
             };
                         
             // 这个函数的this对象就是pjaxPage对象, 通过它可以获得分页data和pjaxPage的配置参数(options)
@@ -47,24 +47,15 @@
             
             if(totalPages > 0) {
             	pageCtrl +=  pjaxPageOpts.pageInfo;
-            	pageCtrl +=  '<ul class="pagination">';		        		
-        		// 可以往下翻 且 不是最后一页
-        		if( !isUp && (currentPage != totalPages) ) {
-        			pageCtrl += '<li><a href="javascript:;" target="_self" title="下一页" tabindex="' + (currentPage+1) + '" source="'+pageHrefPre+(currentPage+1)+'">'+opts.next+'</a></li>';
-        		} else {
-        			isUp = true; //往上翻(开启上一页)
+            	pageCtrl +=  '<ul class="pagination">';	
+            	
+            	if (currentPage > 1) {
+        			pageCtrl += '<li><a href="javascript:;" target="_self" title="'+opts.home+'" tabindex="1" source="'+pageHrefPre+1+'">'+opts.home+'</a></li>'; 
+        			pageCtrl += '<li><a href="javascript:;" target="_self" title="'+opts.prev+'" tabindex="' + (currentPage-1) + '" source="'+pageHrefPre+(currentPage-1)+'">'+opts.prev+'</a></li>'; 
         		}
-        		
-        		// 可以往上翻 且 不是首页
-        		if(isUp && currentPage != 1 ){
-        			pageCtrl += '<li><a href="javascript:;" target="_self" title="上一页" tabindex="' + (currentPage-1) + '" source="'+pageHrefPre+(currentPage-1)+'">'+opts.prev+'</a></li>'; 
-        		} 
-        		
-        		// 从向上翻的状态过度到往下翻
-        		if( currentPage==1 && isUp ){
-        			isUp = false; //往下翻(开启下一页), 程序走到这里不能停下来
-        			// 下翻
-        			pageCtrl += '<li><a href="javascript:;" target="_self" title="下一页" tabindex="' + (currentPage+1) + '" source="'+pageHrefPre+(currentPage+1)+'">'+opts.next+'</a></li>';
+        		if (currentPage < totalPages) {
+        			pageCtrl += '<li><a href="javascript:;" target="_self" title="'+opts.next+'" tabindex="' + (currentPage+1) + '" source="'+pageHrefPre+(currentPage+1)+'">'+opts.next+'</a></li>';
+        			pageCtrl += '<li><a href="javascript:;" target="_self" title="'+opts.end+'" tabindex="' + totalPages + '" source="'+pageHrefPre+totalPages+'">'+opts.end+'</a></li>';
         		}
         		
         		pageCtrl += '</ul>'; 
