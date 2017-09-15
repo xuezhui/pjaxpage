@@ -234,7 +234,7 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |`next`|`String`|"下一页"|表示**下一页**用什么字符串标识|
 
 ### 8.3 `pjaxPage.textModel.js`
-![pjaxPage.singleModel](https://xixifeng.github.io/pjaxpage/example/img/singleModel.png "pjaxPage.textModel")  
+![pjaxPage.singleModel](https://xixifeng.github.io/pjaxpage/example/img/textModel.png "pjaxPage.textModel")  
 ```html
 <ul class="pagination">
 	<li><a href="#">首页</a></li>
