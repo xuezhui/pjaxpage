@@ -28,7 +28,8 @@ Here is the minimal HTML code to get pages working:
 
 ###  1.3 JS Setup
 
-如果采用本插件提供的分页模型,服务端响应的数据的格式必须为`{pageData:{...},...}`, 熟悉[pageData数据结构](#5-pagedata).  
+如果采用本插件提供的分页模型,服务端响应的数据的格式必须为`{pageData:{...},...}`, 熟悉[分页数据结构](#5-pstruct).   
+**注意**:  `{pageData:{...},...}` 中的`pageData`是**分页数据结构**的对象名称.
 ```javascript
 $.pjaxPage({
 
@@ -37,7 +38,8 @@ $.pjaxPage({
 		url : "https://your.damain.com",
 		dataType : "jsonp" // 支持"xml","html","script","json","jsonp","text"...等等
 	},
-	
+	// 自定义分页数据结构对象的名称为"pageData",其实默认也是这个值,可以省略不配置.
+	pageDataKeyName : "pageData",
 	// 拼接分页数据,并返回
 	createDataHtml : function(data) {
 		var content = data.pageData.content;
@@ -88,12 +90,13 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |分页控制区|`P.Ctrl`|用于控制翻页的区域,称之为**分页控制区**|
 |分页索引|`P.Index`|对页片进行编号,一般从1开始,这个编号将称之为**分页索引**,分页索引通常可以被单击,用于翻页|
 |索引触发状态|`P.Active`|用于明显标记被触发的分页索引的状态,称之为**索引触发状态**|
+|分页数据结构|`P.Struct`|从服务端请求某一页数据,有一定格式的,这个格式称之为**分页数据结构**|
 
 定义名,如下图所示:  
 ![定义名](https://xixifeng.github.io/pjaxpage/example/img/names.png "定义名")  
 
-## 5. pageData
-数据结构:  
+## 5. `P.Struct`
+分页数据结构:  
 ```javascript
 {
 	"content":[             // 这页的数据
@@ -137,7 +140,7 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 }
 ```
 
-[FastQuery](https://gitee.com/xixifeng.com/fastquery)项目中的`Page`实例转换成`JSON`后就是这种结构.本项目自带的分页模型都基于`pageData`结构. 当然,开发者也可以自定义数据结构.  
+[FastQuery](https://gitee.com/xixifeng.com/fastquery)项目中的`Page`实例转换成`JSON`后就是这种结构.本项目自带的分页模型都基于`P.Struct`(分页数据结构). 当然,开发者也可以自定义数据结构.  
 
 ## 6. pjaxPage配置选项(opts)
 该配置描述中提到的`opts`指的是`pjaxPage`中的`options`.
@@ -154,6 +157,7 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |`pageInfoTpl`|String|"&lt;p&gt;共{totalElements}条记录,总页数:{totalPages}&lt;/p&gt;"|`P.Info`(分页概述)模板,它会被`pageCodeBox`包裹.熟悉[内置模板标签](#内置模板标签)|
 |`buildTplSource(data,`<br>`textStatus,jqXHR)`|`callback function`|---|**返回类型**:`JSON Object`.作用:构模板数据源.举例:若返回{info:"xxx",goods:3},那么在`pageInfoTpl`中可以通过{info}引用到info值,通过{goods}引用到goods值.参数解释,data:是ajax成功请求所响应的数据;textStatus:用于描述状态的字符串;jqXHR:请参与jQuery文档http://api.jquery.com/jQuery.ajax/#jqXHR.**注意**:这个方法的上下文对象为opts|
 |`pageModel`|JSON| {name:"numberModel"}|用于配置分页模型,开发者扩展扩展自己的分页模型.`numberModel`的可选参数,请参阅分页模型章节|
+|`pageDataKeyName`|String|"pageData"|用于指定`P.Struct`(分页数据结构)的对象名称|
 |`createDataHtml(data,`<br>`textStatus,jqXHR)`|`callback function`|---|**返回类型**:`String`.共:3个参数. 解释,data:是ajax成功请求所响应的数据;textStatus:用于描述状态的字符串;jqXHR:请参与jQuery文档http://api.jquery.com/jQuery.ajax/#jqXHR. 该函数的作用:创建当前`P.Slice`的HTML代码,并返回.**注意**:这个方法的上下文对象为opts|
 |`notFoundTip`|String|"Not Found Data!"|翻页时如果没有找到数据,会将此选项设置的值写入到用于装载`P.Slice`的盒子里,支持HTML|
 |`pageCodeItem`|HTML<br>element|"a[tabindex]"|`P.Index`的HTML元素选择器|

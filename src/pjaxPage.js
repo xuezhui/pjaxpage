@@ -32,13 +32,14 @@
                      pageInfoTpl: "<p>共{totalElements}条记录,总页数:{totalPages}</p>", // 分页摘要
                      buildTplSource : function(data,textStatus,jqXHR){               // 构建模板数据源
                     	 return { 
-                    		 totalElements:data.pageData.totalElements,
-                    		 currentPage:data.pageData.number,
-                    		 totalPages:data.pageData.totalPages};
+                    		 totalElements:data[this.pageDataKeyName].totalElements,
+                    		 currentPage:data[this.pageDataKeyName].number,
+                    		 totalPages:data[this.pageDataKeyName].totalPages};
                      },
                      pageModel : {
          				name : "numberModel"                 // (默认:numberModel) 分页模型的名称
-                     },     
+                     }, 
+                     pageDataKeyName: "pageData",
                      createDataHtml:function(data,textStatus,jqXHR){          // 创建当前页html代码,并返回
                          return "";
                      },                                      

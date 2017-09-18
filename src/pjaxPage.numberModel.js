@@ -27,7 +27,7 @@
                         
             // 这个函数的this对象就是pjaxPage对象, 通过它可以获得分页data和pjaxPage的配置参数(options)
             var pjaxPageObj = this;
-            var data = pjaxPageObj.data.pageData; // 分页数据
+            var data = pjaxPageObj.data[this.pageDataKeyName]; // 分页数据
             
             var opts = $.extend(defaults, pjaxPageObj.pageModel.opts);
             
