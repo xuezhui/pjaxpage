@@ -258,6 +258,22 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |`end`|`String`|"末页"|表示**末页**用什么字符串标识|
 
 
+### 8.4 `pjaxPage.toggleModel.js`
+![pjaxPage.singleModel](https://xixifeng.github.io/pjaxpage/example/img/toggleModel.png "pjaxPage.toggleModel")  
+```html
+<ul class="pagination">
+	<li><a href="#">&laquo;</a></li>
+	<li><a href="#">‹</a></li>
+	<li><a><b>17</b>/32</a></li>
+	<li><a href="#">›</a></li>
+	<li><a href="#">&raquo;</a></li>
+</ul>
+```
+
+配置选项(opts): 同 `pjaxPage.textModel.js`.
+
+
+
   
 
 

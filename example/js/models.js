@@ -29,3 +29,14 @@ model.textModel =  {
             end : "End"
 		}
 };
+
+
+model.toggleModel =  {
+		name : "toggleModel",
+		opts : {
+            home : "&laquo;",
+            prev : "&lsaquo;",
+            next : "&rsaquo;",
+            end : "&raquo;"
+		}
+};
