@@ -1,13 +1,13 @@
 /*!
- * pjaxPage JavaScript Library v1.0
+ * pjaxPage JavaScript Library
  * https://gitee.com/xixifeng.com/pjaxpage
+ * https://github.com/xixifeng/pjaxpage
  *
  * Author: xixifeng (fastquery@126.com)  
  * 
  * Copyright JS Foundation and other contributors
  * Released under the MIT license
  *
- * Date: 2017-09-15
  */
 (function($) {
 	$.extend({
