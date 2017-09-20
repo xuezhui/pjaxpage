@@ -1,6 +1,6 @@
 
-- [Download the compressed, production pjaxPage 1.0](https://gitee.com/xixifeng.com/pjaxpage/raw/master/lib/1.0/min/pjaxPage-1.0.min.tar.gz "pjaxPage")
-- [Download the uncompressed, development pjaxPage 1.0](https://gitee.com/xixifeng.com/pjaxpage/raw/master/lib/1.0/dev/pjaxPage-1.0.dev.tar.gz "pjaxPage")
+- [Download the compressed, production pjaxPage 1.1](https://gitee.com/xixifeng.com/pjaxpage/raw/master/lib/1.1/min/pjaxPage-1.1.min.tar.gz "pjaxPage")
+- [Download the uncompressed, development pjaxPage 1.1](https://gitee.com/xixifeng.com/pjaxpage/raw/master/lib/1.1/dev/pjaxPage-1.1.dev.tar.gz "pjaxPage")
 
 ## 1. Quick Start
 
