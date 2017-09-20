@@ -15,7 +15,7 @@
 			
 			// 分页模型的可选配置选项的默认值
             var defaults = {
-                    home : "&lt;&lt;",
+            		home : "&lt;&lt;",
                     prev : "&lt;",
                     next : "&gt;",
                     end : "&gt;&gt;"
@@ -44,9 +44,9 @@
              }
     		
             var pageCtrl = '';
-            
+            var pageInfoTpl = opts.pageInfoTpl ? opts.pageInfoTpl :  pjaxPageOpts.pageInfoTpl;
             if(totalPages > 0) {
-            	pageCtrl +=  pjaxPageOpts.pageInfo;
+            	pageCtrl += $.tpl(pageInfoTpl,pjaxPageOpts.buildTplSource.call(pjaxPageOpts,pjaxPageOpts.data,pjaxPageOpts.textStatus,pjaxPageOpts.jqXHR));
             	pageCtrl +=  '<ul class="pagination">';	
             	
             	if (currentPage > 1) {

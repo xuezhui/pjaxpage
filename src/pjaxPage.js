@@ -73,7 +73,6 @@
                             var dataHtml = this.createDataHtml.call(this,this.data,this.textStatus,this.jqXHR); // 数据列表的html
                             var pageModelName = this.pageModel.name;  // 获得分页模型的名称
                             var modelMethod = $[pageModelName];       // 根据名称获得分页模型函数(这有点类似java的反射)
-                            this.pageInfo = $.tpl(this.pageInfoTpl,this.buildTplSource.call(this,this.data,this.textStatus,this.jqXHR));
                             modelMethod.call(this);                   // 调用分页模型函数
                             
                             if(dataHtml==""||dataHtml==null) {

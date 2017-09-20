@@ -22,7 +22,7 @@ Here is the minimal HTML code to get pages working:
 ```html
 <!-- 核 -->
 <script src="pjaxPage.js"></script>
-<!-- 分页模型 -->
+<!-- 任选一个分页模型(命名规范: pjaxPage.xXXModel.js) -->
 <script src="pjaxPage.numberModel.js"></script>
 ```
 
@@ -196,7 +196,7 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 
 ## 8. 分页模型 
 ### 8.1 `pjaxPage.numberModel.js`
-![pjaxPage.numberModel](https://xixifeng.github.io/pjaxpage/example/img/numberModel.png "pjaxPage.numberModel")  
+![pjaxPage.numberModel](https://xixifeng.github.io/pjaxpage/example/img/numberModel.png "pjaxPage.numberModel.js")  
 ```html
 <ul class="pagination">
 	<li><a href="#">首页</a></li>
@@ -220,9 +220,10 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |`next`|`String`|`"&gt;"`<br>">" HTML|表示**下一页**用什么字符串标识|
 |`end`|`String`|`"&gt;&gt;"`<br>">>" HTML|表示**末页**用什么字符串标识|
 |`showEllipsis`|`boolean`|true|是否在分页控制区显示**省略号**(...)|
+|`pageInfoTpl`|`String`|同pjaxPage的opts.pageInfoTpl中的默认值|此配置优先|
 
 ### 8.2 `pjaxPage.singleModel.js`
-![pjaxPage.singleModel](https://xixifeng.github.io/pjaxpage/example/img/singleModel.png "pjaxPage.singleModel")  
+![pjaxPage.singleModel](https://xixifeng.github.io/pjaxpage/example/img/singleModel.png "pjaxPage.singleModel.js")  
 ```html
 <ul class="pagination">
 	<li><a href="#">下一页</a></li>
@@ -236,9 +237,10 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |:-----|:-----|:-----|:-----|
 |`prev`|`String`|"上一页"|表示**上一页**用什么字符串标识|
 |`next`|`String`|"下一页"|表示**下一页**用什么字符串标识|
+|`pageInfoTpl`|`String`|同pjaxPage的opts.pageInfoTpl中的默认值|此配置优先|
 
 ### 8.3 `pjaxPage.textModel.js`
-![pjaxPage.singleModel](https://xixifeng.github.io/pjaxpage/example/img/textModel.png "pjaxPage.textModel")  
+![pjaxPage.singleModel](https://xixifeng.github.io/pjaxpage/example/img/textModel.png "pjaxPage.textModel.js")  
 ```html
 <ul class="pagination">
 	<li><a href="#">首页</a></li>
@@ -256,10 +258,12 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 |`prev`|`String`|"上一页"|表示**上一页**用什么字符串标识|
 |`next`|`String`|"下一页"|表示**下一页**用什么字符串标识|
 |`end`|`String`|"末页"|表示**末页**用什么字符串标识|
+|`pageInfoTpl`|`String`|同pjaxPage的opts.pageInfoTpl中的默认值|此配置优先|
+|`disabledName`|`String`|"disabled"|定义不可点击链接的class样式选择器的名称|
 
 
 ### 8.4 `pjaxPage.toggleModel.js`
-![pjaxPage.singleModel](https://xixifeng.github.io/pjaxpage/example/img/toggleModel.png "pjaxPage.toggleModel")  
+![pjaxPage.singleModel](https://xixifeng.github.io/pjaxpage/example/img/toggleModel.png "pjaxPage.toggleModel.js")  
 ```html
 <ul class="pagination">
 	<li><a href="#">&laquo;</a></li>
@@ -273,8 +277,23 @@ pjax = pushState + ajax, **Page**源自于[FastQuery](https://gitee.com/xixifeng
 配置选项(opts): 同 `pjaxPage.textModel.js`.
 
 
+### 8.5 `pjaxPage.simpleModel.js`
+![pjaxPage.singleModel](https://xixifeng.github.io/pjaxpage/example/img/simpleModel.png "pjaxPage.simpleModel.js")  
+```html
+<ul class="pagination">
+	<li><a href="#">Prev</a></li>
+	<li><a href="#">Next</a></li>
+</ul>
+```
 
-  
+配置选项(opts):
+
+| 属性 | 类型 | 默认值 | 描述 |
+|:-----|:-----|:-----|:-----|
+|`prev`|`String`|"上一页"|表示**上一页**用什么字符串标识|
+|`next`|`String`|"下一页"|表示**下一页**用什么字符串标识|
+|`pageInfoTpl`|`String`|同pjaxPage的opts.pageInfoTpl中的默认值|此配置优先|
+|`disabledName`|`String`|"disabled"|定义不可点击链接的class样式选择器的名称|
 
 
 

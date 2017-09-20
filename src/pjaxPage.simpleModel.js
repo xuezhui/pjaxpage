@@ -10,12 +10,12 @@
  * Date: 2017-05-18
  */
 (function($) {
-	var isUp = false;
 	$.extend({
-		singleModel : function(){
+		simpleModel : function(){
 			
 			// 分页模型的可选配置选项的默认值
             var defaults = {
+            	disabledName : "disabled",             // 定义不可点击链接的class样式名称
                 prev : "上一页",
                 next : "下一页"
             };
@@ -46,24 +46,20 @@
             var pageInfoTpl = opts.pageInfoTpl ? opts.pageInfoTpl :  pjaxPageOpts.pageInfoTpl;
             if(totalPages > 0) {
             	pageCtrl += $.tpl(pageInfoTpl,pjaxPageOpts.buildTplSource.call(pjaxPageOpts,pjaxPageOpts.data,pjaxPageOpts.textStatus,pjaxPageOpts.jqXHR));
-            	pageCtrl +=  '<ul class="pagination">';		        		
-        		// 可以往下翻 且 不是最后一页
-        		if( !isUp && (currentPage != totalPages) ) {
-        			pageCtrl += '<li><a href="javascript:;" target="_self" title="下一页" tabindex="' + (currentPage+1) + '" source="'+pageHrefPre+(currentPage+1)+'">'+opts.next+'</a></li>';
+            	pageCtrl +=  '<ul class="pagination">';		
+            	
+            	// 如果不是首页
+        		if(currentPage > 1 ) {
+        			pageCtrl += '<li><a href="javascript:;" target="_self" title="上一页" tabindex="' + (currentPage-1) + '" source="'+pageHrefPre+(currentPage-1)+'">'+opts.prev+'</a></li>'; 
         		} else {
-        			isUp = true; //往上翻(开启上一页)
+        			pageCtrl += '<li class="'+opts.disabledName+'"><a href="javascript:;" title="已到首页" >'+opts.prev+'</a></li>'
         		}
         		
-        		// 可以往上翻 且 不是首页
-        		if(isUp && currentPage != 1 ){
-        			pageCtrl += '<li><a href="javascript:;" target="_self" title="上一页" tabindex="' + (currentPage-1) + '" source="'+pageHrefPre+(currentPage-1)+'">'+opts.prev+'</a></li>'; 
-        		} 
-        		
-        		// 从向上翻的状态过度到往下翻
-        		if( currentPage==1 && isUp ){
-        			isUp = false; //往下翻(开启下一页), 程序走到这里不能停下来
-        			// 下翻
+        		//如果不是最后一页
+        		if(currentPage < totalPages){
         			pageCtrl += '<li><a href="javascript:;" target="_self" title="下一页" tabindex="' + (currentPage+1) + '" source="'+pageHrefPre+(currentPage+1)+'">'+opts.next+'</a></li>';
+        		} else {
+        			pageCtrl += '<li class="'+opts.disabledName+'"><a href="javascript:;" title="已到尾页" >'+opts.next+'</a></li>'
         		}
         		
         		pageCtrl += '</ul>'; 
