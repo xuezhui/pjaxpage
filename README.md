@@ -29,44 +29,59 @@ Here is the minimal HTML code to get pages working:
 ###  1.3 JS Setup
 
 如果采用本插件提供的分页模型,服务端响应的数据的格式必须为`{pageData:{...},...}`, 熟悉[分页数据结构](#5-pstruct).   
-**注意**:  `{pageData:{...},...}` 中的`pageData`是**分页数据结构**的对象名称.
+**注意**:  `{pageData:{...},...}` 中的`pageData`是**分页数据结构**的对象名称,该名称允许配置,请看pjaxPage配置选项(opts)章节.
 ```javascript
 $.pjaxPage({
+	
+	        // ajax 配置.支持jQuery.ajax所有的配置选项.ajax的settings,请参照jQuery官方说明
+			ajax : {
+				url : "https://your.damain.com/pjaxpage-data.php",
+				dataType : "jsonp" // 支持"json","jsonp","xml","html","script","text"...等等
+			},
+			// 自定义分页数据结构对象的名称为"pageData",其实默认也是这个值,可以省略不配置.
+			pageDataKeyName : "pageData",
+			size : 10,
+			// 配置分页模型
+			pageModel: {
+				name : "numberModel", // 分页模型的名称
+				opts : {
+				    // 分页模型的opts, 详情请阅读分页模型章节
+				   indexNum: 7,
+		            home : "Home",
+		            prev : "Prev",
+		            next : "Next",
+		            end : "End",
+	                showEllipsis : false
+				}
+			},
+			createDataHtml : function(data,textStatus,jqXHR) { // 在此仅需拼接分页数据 然后return 即可
+				var content = data.pageData.content;
+				var total = content.length;
+				if (total == 0)
+					return "";
 
-	// ajax 配置.支持jQuery.ajax所有的配置选项.ajax的settings,请参照jQuery官方说明
-	ajax : {
-		url : "https://your.damain.com",
-		dataType : "jsonp" // 支持"xml","html","script","json","jsonp","text"...等等
-	},
-	// 自定义分页数据结构对象的名称为"pageData",其实默认也是这个值,可以省略不配置.
-	pageDataKeyName : "pageData",
-	// 拼接分页数据,并返回
-	createDataHtml : function(data) {
-		var content = data.pageData.content;
-		var total = content.length;
-		if (total == 0)
-			return "无数据";
+				var dataHtml = '';
+				var orderNum = (this.currentPage - 1) * this.size + 1; // 序号
+				for (var i = 0; i < total; i++, orderNum++) {
+					
+					var cizu = content[i].cizu;
+					var pinyin = content[i].pinyin;
+					var options = content[i].options;
+					var ok = content[i].ok;
+					var info = content[i].info;
+					
+					dataHtml += '<tr>';
+					dataHtml += '	<td>' + orderNum + '</td>';
+					dataHtml += '	<td>' + cizu + '</td>';
+					dataHtml += '	<td>' + pinyin + '</td>';
+					dataHtml += '	<td>' + options + '</td>';
+					dataHtml += '	<td>' + ok + '</td>';
+					dataHtml += '	<td>' + info + '</td>';
+					dataHtml += '</tr>';
+				}
 
-		var dataHtml = '';
-		for (var i = 0; i < total; i++) {
-			
-			var cizu = content[i].cizu;
-			var pinyin = content[i].pinyin;
-			var options = content[i].options;
-			var ok = content[i].ok;
-			var info = content[i].info;
-			
-			dataHtml += '<tr>';
-			dataHtml += '	<td>' + cizu + '</td>';
-			dataHtml += '	<td>' + pinyin + '</td>';
-			dataHtml += '	<td>' + options + '</td>';
-			dataHtml += '	<td>' + ok + '</td>';
-			dataHtml += '	<td>' + info + '</td>';
-			dataHtml += '</tr>';
-		}
-
-		return dataHtml;
-	}
+				return dataHtml;
+			}
 });
 ```
 
